@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem } from '@coreui/react'
 
@@ -57,10 +58,18 @@ import MainChart from './MainChart'
 
 const Devices = () => {
   const [activeItem, setActiveItem] = useState(null)
+  const Navigate = useNavigate()
+
   const handleAccordionClick = (key) => {
     console.log(`Clicked Item Key: ${key}`)
     setActiveItem((prevKey) => (prevKey === key ? null : key)) // Toggle active item
   }
+
+  const handlePlantRecommendation = (device) => {
+    console.log(`Plant recommendation for ${device}`)
+    Navigate(`/devices/${device}/AIAnalysis`)
+  }
+
   const device1graph = [
     { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
     { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
@@ -70,24 +79,33 @@ const Devices = () => {
   ]
 
   return (
-    <div>
+    <div className="device-list">
       <CAccordion activeItemKey={null}>
-        <CAccordionItem itemKey={1}>
+        <CAccordionItem itemKey={1} className="device-li">
           <CAccordionHeader onClick={() => handleAccordionClick(1)}>Device 1</CAccordionHeader>
-          <CAccordionBody>
-            <button>Test</button>
+          <CAccordionBody className="accordion-body">
+            <h6>Plant recommendation based on AI analysis </h6>
+            <button className="plant-button" onClick={() => handlePlantRecommendation(1)}>
+              Recommend a plant
+            </button>
           </CAccordionBody>
         </CAccordionItem>
         <CAccordionItem itemKey={2}>
           <CAccordionHeader onClick={() => handleAccordionClick(2)}>Device 2</CAccordionHeader>
-          <CAccordionBody>
-            <button>Test</button>
+          <CAccordionBody className="accordion-body">
+            <h6>Plant recommendation based on AI analysis </h6>
+            <button className="plant-button" onClick={() => handlePlantRecommendation(2)}>
+              Recommend a plant
+            </button>
           </CAccordionBody>
         </CAccordionItem>
         <CAccordionItem itemKey={3}>
           <CAccordionHeader onClick={() => handleAccordionClick(3)}>Device 3</CAccordionHeader>
-          <CAccordionBody>
-            <button>Test</button>
+          <CAccordionBody className="accordion-body">
+            <h6>Plant recommendation based on AI analysis </h6>
+            <button className="plant-button" onClick={() => handlePlantRecommendation(3)}>
+              Recommend a plant
+            </button>
           </CAccordionBody>
         </CAccordionItem>
       </CAccordion>
