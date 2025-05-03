@@ -1,0 +1,32 @@
+.mission-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgb(33.55, 151.45, 65.05);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: white;
+}
+.mission-container h1 {
+  font-size: 40px;
+  color: white;
+}
+
+.mission-container p {
+  padding-top: 30px;
+  font-size: 25px;
+  color: white;
+}
+
+.mission-title {
+  font-size: 2.5rem;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.mission-description {
+  font-size: 1.2rem;
+  color: #555;
+  line-height: 1.6;
+}

@@ -67,7 +67,7 @@ const Device1Summary = () => {
       </div> */}
       {showBox && (
         <div className="result-box">
-          <h3>Results for device {deviceId}</h3>
+          <h3>Results for Device {deviceId}</h3>
           <h5>Powered by Google Gemini</h5>
         </div>
       )}

@@ -36,9 +36,9 @@ const AppSidebar = () => {
       }}
     >
       <CSidebarHeader className="border-bottom">
-        <CSidebarBrand to="/">
-          <CIcon customClassName="sidebar-brand-full" icon={logo} height={32} />
-          <CIcon customClassName="sidebar-brand-narrow" icon={sygnet} height={32} />
+        <CSidebarBrand to="/" className="logo">
+          <img src="/demeter-logo.png" height={32} />
+          <h6>Demeter</h6>
         </CSidebarBrand>
         <CCloseButton
           className="d-lg-none"

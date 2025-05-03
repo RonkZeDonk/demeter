@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem } from '@coreui/react'
+import './Device.css'
 
 import {
   CAvatar,
@@ -68,7 +69,7 @@ const Devices = () => {
 
   const handlePlantRecommendation = (device) => {
     console.log(`Plant recommendation for ${device}`)
-    Navigate(`/devices/${device}/AIAnalysis`, { state: { deviceId: device } })
+    Navigate(`/devices/AIAnalysis`, { state: { deviceId: device } })
   }
 
   const device1graph = [
@@ -81,6 +82,7 @@ const Devices = () => {
 
   return (
     <div className="device-list">
+      <h2>Select a device to analyze</h2>
       <CAccordion activeItemKey={null}>
         <CAccordionItem itemKey={1} className="device-li">
           <CAccordionHeader onClick={() => handleAccordionClick(1)}>Device 1</CAccordionHeader>

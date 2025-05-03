@@ -104,6 +104,24 @@ body {
     margin: 0;
     padding: 0;
   }
+
+  .logo {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+  }
+  
+  .logo img {
+    display: block; 
+  }
+  
+  .logo h6 {
+    margin: 0; 
+    font-size: 1.25rem;
+    color: #fff;
+    padding: 0;
+    text-decoration: none;
+  }
   
 
 

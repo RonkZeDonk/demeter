@@ -2,6 +2,8 @@ import React from 'react'
 
 const Devices = React.lazy(() => import('./views/devices/Devices'))
 const Device1Summary = React.lazy(() => import('./views/devices/Device1Summary'))
+const Mission = React.lazy(() => import('./views/mission/Mission'))
+
 const Colors = React.lazy(() => import('./views/theme/colors/Colors'))
 const Typography = React.lazy(() => import('./views/theme/typography/Typography'))
 
@@ -55,7 +57,9 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'))
 const routes = [
   { path: '/', exact: true, name: '' },
   { path: '/devices', name: 'Devices', element: Devices },
-  { path: '/devices/1/AIAnalysis', name: 'device1summary', element: Device1Summary },
+  { path: '/devices/AIAnalysis', name: 'AI Summary', element: Device1Summary },
+  { path: '/mission', name: 'Our Mission', element: Mission },
+
   { path: '/theme', name: 'Theme', element: Colors, exact: true },
   { path: '/theme/colors', name: 'Colors', element: Colors },
   { path: '/theme/typography', name: 'Typography', element: Typography },
