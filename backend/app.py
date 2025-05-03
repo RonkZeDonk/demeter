@@ -49,6 +49,7 @@ def get_weather_data():
 
     return str(forecast)
 
+
 app = Flask(__name__, static_url_path='/')
 
 @app.route('/api/light_values/<device_id>')
@@ -71,6 +72,7 @@ def generate(device_id):
     )
 
     return response.text
+
 
 @app.route('/api/ping')
 def ping_route():
