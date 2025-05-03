@@ -55,6 +55,7 @@ import avatar6 from 'src/assets/images/avatars/6.jpg'
 import WidgetsBrand from '../widgets/WidgetsBrand'
 import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
+import MainChart2 from './MainChart2'
 
 const Devices = () => {
   const [activeItem, setActiveItem] = useState(null)
@@ -67,7 +68,7 @@ const Devices = () => {
 
   const handlePlantRecommendation = (device) => {
     console.log(`Plant recommendation for ${device}`)
-    Navigate(`/devices/${device}/AIAnalysis`)
+    Navigate(`/devices/${device}/AIAnalysis`, { state: { deviceId: device } })
   }
 
   const device1graph = [
@@ -134,7 +135,7 @@ const Devices = () => {
       {/* Render Device 2 info*/}
       {activeItem === 2 && (
         <div style={{ marginTop: '20px' }}>
-          <h4>Device 1 Statistics</h4>
+          <h4>Device 2 Statistics</h4>
           <CRow>
             {device1graph.map((item, index) => (
               <CCol key={index} xs={12} sm={6} lg={4}>
@@ -156,7 +157,7 @@ const Devices = () => {
       {/* Render Device 3 info*/}
       {activeItem === 3 && (
         <div style={{ marginTop: '20px' }}>
-          <h4>Device 1 Statistics</h4>
+          <h4>Device 3 Statistics</h4>
           <CRow>
             {device1graph.map((item, index) => (
               <CCol key={index} xs={12} sm={6} lg={4}>
@@ -170,7 +171,7 @@ const Devices = () => {
           </CRow>
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
-            <MainChart />
+            <MainChart2 />
           </div>
         </div>
       )}

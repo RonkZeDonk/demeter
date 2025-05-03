@@ -3,7 +3,7 @@ import React, { useEffect, useRef } from 'react'
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
 
-const MainChart = () => {
+const MainChart2 = () => {
   const chartRef = useRef(null)
 
   useEffect(() => {
@@ -34,7 +34,7 @@ const MainChart = () => {
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'],
+          labels: ['7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM'],
           datasets: [
             {
               label: 'My First dataset',
@@ -67,7 +67,7 @@ const MainChart = () => {
                 // random(50, 200),
                 // random(50, 200),
                 // random(50, 200),
-                100000, 95000, 85000, 70000, 50000, 30000, 10000,
+                1500, 4000, 7000, 11000, 14000, 17000, 18000,
               ],
             },
             {
@@ -106,11 +106,11 @@ const MainChart = () => {
               grid: {
                 color: getStyle('--cui-border-color-translucent'),
               },
-              max: 100000,
+              max: 20000,
               ticks: {
                 color: getStyle('--cui-body-color'),
                 maxTicksLimit: 5,
-                stepSize: Math.ceil(100000 / 5),
+                stepSize: Math.ceil(20000 / 5),
               },
             },
           },
@@ -131,4 +131,4 @@ const MainChart = () => {
   )
 }
 
-export default MainChart
+export default MainChart2
