@@ -5,13 +5,15 @@ from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
 from google import genai
 from google.genai import types
+import json
+from bson.json_util import dumps
 
 MONGO_API_KEY = getenv("MONGO_URI")
 GEMINI_API_KEY = getenv("GEMINI_API_KEY")
 WEATHER_API_KEY = getenv("MAPS_API_KEY")
 
 def get_mongo_data(device_id):
-    res = ""
+    res = []
 
     # Create a new client and connect to the server
     client = MongoClient(MONGO_API_KEY, server_api=ServerApi('1'))
@@ -23,13 +25,13 @@ def get_mongo_data(device_id):
         result = collection.find(query)
 
         for doc in result:
-            res += str(doc) + "\n"
+            res.append(doc)
 
     except:
         print("error: couldn't connect to mongodb")
         pass
 
-    return res
+    return dumps(res) 
 
 def get_weather_data():
     weather_get = "https://weather.googleapis.com/v1/forecast/days:lookup?key=%s&location.latitude=43.5355648&location.longitude=-80.2226176&days=7&pageSize=7" % WEATHER_API_KEY
