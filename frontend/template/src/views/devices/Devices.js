@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 import { CAccordion, CAccordionBody, CAccordionHeader, CAccordionItem } from '@coreui/react'
@@ -46,15 +46,6 @@ import {
   cilUserFemale,
 } from '@coreui/icons'
 
-import avatar1 from 'src/assets/images/avatars/1.jpg'
-import avatar2 from 'src/assets/images/avatars/2.jpg'
-import avatar3 from 'src/assets/images/avatars/3.jpg'
-import avatar4 from 'src/assets/images/avatars/4.jpg'
-import avatar5 from 'src/assets/images/avatars/5.jpg'
-import avatar6 from 'src/assets/images/avatars/6.jpg'
-
-import WidgetsBrand from '../widgets/WidgetsBrand'
-import WidgetsDropdown from '../widgets/WidgetsDropdown'
 import MainChart from './MainChart'
 import MainChart2 from './MainChart2'
 
@@ -79,6 +70,58 @@ const Devices = () => {
     { title: 'New Users', value: '22.123 Users', percent: 80, color: 'danger' },
     { title: 'Bounce Rate', value: 'Average Rate', percent: 40.15, color: 'primary' },
   ]
+
+  const [parsedData, setParsedData] = useState([])
+
+  const fetchLightValues = async (device) => {
+    try {
+      const response = await fetch(`/api/light_values/${device}`, {
+        mode: 'no-cors',
+      })
+      if (!response.ok) {
+        console.log('Response:', response)
+        throw new Error(`Error: ${response.status} ${response.statusText}`)
+      }
+
+      const textData = await response.text() // Read the response as plain text
+      console.log('Raw Text Data:', textData)
+      const data = textData
+        .split('\n') // Split the text by newlines
+        .filter((line) => line.trim() !== '') // Remove empty lines
+        .map((line) => JSON.parse(line)) // Parse each line as JSON
+
+      // console.log('Light Values:', data)
+      return data // Return the parsed array of objects
+    } catch (error) {
+      console.error('Failed to fetch light values:', error)
+      return null
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchLightValues(activeItem)
+      if (data) {
+        // console.log('Fetched Light Values:', data)
+
+        //parse
+        const parsedData = data[0].map((row) => {
+          // console.log('Row:', row)
+          const time = new Date(row.time.$date) // Convert timestamp to Date object
+          const luxValue = row.luxValue
+          const deviceId = row.deviceId
+
+          console.log('Parsed Row:', { time, luxValue, deviceId })
+
+          // Return parsed object
+          return { time, luxValue, deviceId }
+        })
+        setParsedData(parsedData) // Set the parsed data to state
+        console.log('Parsed Data:', parsedData)
+      }
+    }
+    fetchData()
+  }, [activeItem])
 
   return (
     <div className="device-list">
@@ -129,7 +172,7 @@ const Devices = () => {
           </CRow>
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
-            <MainChart />
+            <MainChart data={parsedData} />
           </div>
         </div>
       )}
@@ -151,7 +194,7 @@ const Devices = () => {
           </CRow>
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
-            <MainChart />
+            <MainChart data={parsedData} />
           </div>
         </div>
       )}
@@ -173,7 +216,7 @@ const Devices = () => {
           </CRow>
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
-            <MainChart2 />
+            <MainChart data={parsedData} />
           </div>
         </div>
       )}
