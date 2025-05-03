@@ -3,7 +3,8 @@ import React, { useEffect, useRef } from 'react'
 import { CChartLine } from '@coreui/react-chartjs'
 import { getStyle } from '@coreui/utils'
 
-const MainChart = () => {
+const MainChart = ({ data }) => {
+  console.log('MainChart data:', data)
   const chartRef = useRef(null)
 
   useEffect(() => {
@@ -27,6 +28,8 @@ const MainChart = () => {
   }, [chartRef])
 
   const random = () => Math.round(Math.random() * 100)
+  const labels = data.map((item) => item.time.toLocaleTimeString()) // Use time for x-axis labels
+  const luxValues = data.map((item) => item.luxValue) // Use luxValue for y-axis data
 
   return (
     <>
@@ -34,50 +37,16 @@ const MainChart = () => {
         ref={chartRef}
         style={{ height: '300px', marginTop: '40px' }}
         data={{
-          labels: ['12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'],
+          labels: labels,
           datasets: [
             {
-              label: 'My First dataset',
+              label: 'Lux Value',
               backgroundColor: `rgba(${getStyle('--cui-info-rgb')}, .1)`,
               borderColor: getStyle('--cui-info'),
               pointHoverBackgroundColor: getStyle('--cui-info'),
               borderWidth: 2,
-              data: [
-                random(50, 10000),
-                random(50, 10000),
-                random(50, 10000),
-                random(50, 10000),
-                random(50, 1000),
-                random(50, 10000),
-                random(50, 10000),
-              ],
+              data: luxValues,
               fill: true,
-            },
-            {
-              label: 'My Second dataset',
-              backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-success'),
-              pointHoverBackgroundColor: getStyle('--cui-success'),
-              borderWidth: 2,
-              data: [
-                // random(50, 200),
-                // random(50, 200),
-                // random(50, 200),
-                // random(50, 200),
-                // random(50, 200),
-                // random(50, 200),
-                // random(50, 200),
-                100000, 95000, 85000, 70000, 50000, 30000, 10000,
-              ],
-            },
-            {
-              label: 'My Third dataset',
-              backgroundColor: 'transparent',
-              borderColor: getStyle('--cui-danger'),
-              pointHoverBackgroundColor: getStyle('--cui-danger'),
-              borderWidth: 1,
-              borderDash: [8, 5],
-              data: [65, 65, 65, 65, 65, 65, 65],
             },
           ],
         }}
@@ -106,11 +75,11 @@ const MainChart = () => {
               grid: {
                 color: getStyle('--cui-border-color-translucent'),
               },
-              max: 100000,
+              // max: 100000,
               ticks: {
                 color: getStyle('--cui-body-color'),
                 maxTicksLimit: 5,
-                stepSize: Math.ceil(100000 / 5),
+                // stepSize: Math.ceil(100000 / 5),
               },
             },
           },
