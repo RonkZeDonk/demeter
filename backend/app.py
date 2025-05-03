@@ -58,10 +58,9 @@ app = Flask(__name__, static_url_path='/')
 def light_values(device_id):
     return Response(get_mongo_data(device_id), mimetype="application/json")
 
-@app.route('/api/generate/<device_id>')
-def generate(device_id):
-    prompt = "Recommend one commonly accessible and easily maintainable plant that would thrive under these conditions:\n\n"
-
+@app.route('/api/generate/<device_id>/<type>/<frequency>')
+def generate(device_id, type, frequency):
+    prompt = "Recommend one commonly accessible and easily maintainable plant that would thrive under these conditions. The plant must be a %s and watered %s\n\n" % (type, frequency)
     prompt += get_mongo_data(device_id)
     prompt += get_weather_data()
 
