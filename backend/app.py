@@ -47,7 +47,7 @@ def get_weather_data():
             }
         )
 
-    return forecast
+    return str(forecast)
 
 app = Flask(__name__, static_url_path='/')
 
@@ -70,7 +70,7 @@ def generate(device_id):
         model="gemini-2.0-flash", contents=prompt
     )
 
-    return Response(response.text, mimetype="application/json")
+    return response.text
 
 @app.route('/api/ping')
 def ping_route():
