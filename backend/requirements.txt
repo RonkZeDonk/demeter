@@ -1,1 +1,5 @@
 Flask
+python-dotenv
+google-genai
+requests
+pymongo[srv]==3.12

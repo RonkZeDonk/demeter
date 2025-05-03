@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/root/.npm npm install
 COPY frontend .
 CMD ["npm", "run", "build"]
 
-FROM python:3 AS backend
+FROM python:3.12 AS backend
 
 WORKDIR /usr/src/app
 
