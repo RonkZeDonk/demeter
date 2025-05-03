@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Device1Summary.css'
 import { useLocation } from 'react-router-dom'
 
@@ -23,6 +23,41 @@ const Device1Summary = () => {
   const handleAnalyze = () => {
     setShowBox(true)
   }
+
+  const fetchLightValues = async (deviceId) => {
+    try {
+      const response = await fetch(`/api/light_values/${deviceId}`, {
+        mode: 'no-cors',
+      })
+      if (!response.ok) {
+        console.log('Response:', response)
+        throw new Error(`Error: ${response.status} ${response.statusText}`)
+      }
+
+      const textData = await response.text() // Read the response as plain text
+      console.log('Raw Text Data:', textData)
+      const data = textData
+        .split('\n') // Split the text by newlines
+        .filter((line) => line.trim() !== '') // Remove empty lines
+        .map((line) => JSON.parse(line)) // Parse each line as JSON
+
+      console.log('Light Values:', data)
+      return data // Return the parsed array of objects
+    } catch (error) {
+      console.error('Failed to fetch light values:', error)
+      return null
+    }
+  }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchLightValues(deviceId)
+      if (data) {
+        console.log('Fetched Light Values:', data)
+      }
+    }
+    fetchData()
+  }, [deviceId])
 
   return (
     <div>
