@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 const Device1Summary = () => {
   const [selectedPlantType, setSelectedPlantType] = useState('Plant Type ▼')
   const [selectedWateringFrequency, setSelectedWateringFrequency] = useState('Watering Frequency ▼')
+  const [result, setResult] = useState('Thinking hard...')
 
   const [showBox, setShowBox] = useState(false)
 
@@ -20,8 +21,32 @@ const Device1Summary = () => {
     setSelectedWateringFrequency(frequency)
   }
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     setShowBox(true)
+
+    try {
+      // Construct the API URL with the required parameters
+      const response = await fetch(
+        `/api/generate/${deviceId}/${selectedPlantType}/${selectedWateringFrequency}`,
+        {
+          method: 'GET',
+        },
+      )
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status} ${response.statusText}`)
+      }
+
+      // Parse the response
+      const data = await response.text() // Assuming the API returns plain text
+      console.log('API Response:', data)
+
+      // Update the result state with the fetched data
+      setResult(data)
+    } catch (error) {
+      console.error('Failed to fetch analysis:', error)
+      setResult('Failed to fetch analysis. Please try again.')
+    }
   }
 
   return (
@@ -69,6 +94,7 @@ const Device1Summary = () => {
         <div className="result-box">
           <h3>Results for Device {deviceId}</h3>
           <h5>Powered by Google Gemini</h5>
+          <p>{result}</p>
         </div>
       )}
     </div>
