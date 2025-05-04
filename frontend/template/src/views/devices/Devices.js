@@ -108,6 +108,7 @@ const Devices = () => {
         const parsedData = data[0].map((row) => {
           // console.log('Row:', row)
           const time = new Date(row.time.$date) // Convert timestamp to Date object
+          time.setHours(time.getHours() + 4) // Adjust the time by adding 5 hours
           const luxValue = row.luxValue
           const deviceId = row.deviceId
 
@@ -159,7 +160,7 @@ const Devices = () => {
       {activeItem === 1 && (
         <div style={{ marginTop: '20px' }}>
           <h4>Device 1 Statistics</h4>
-          <CRow>
+          {/* <CRow>
             {device1graph.map((item, index) => (
               <CCol key={index} xs={12} sm={6} lg={4}>
                 <div className="text-body-secondary">{item.title}</div>
@@ -169,7 +170,7 @@ const Devices = () => {
                 <CProgress thin className="mt-2" color={item.color} value={item.percent} />
               </CCol>
             ))}
-          </CRow>
+          </CRow> */}
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
             <MainChart data={parsedData} />
@@ -181,7 +182,7 @@ const Devices = () => {
       {activeItem === 2 && (
         <div style={{ marginTop: '20px' }}>
           <h4>Device 2 Statistics</h4>
-          <CRow>
+          {/* <CRow>
             {device1graph.map((item, index) => (
               <CCol key={index} xs={12} sm={6} lg={4}>
                 <div className="text-body-secondary">{item.title}</div>
@@ -191,7 +192,7 @@ const Devices = () => {
                 <CProgress thin className="mt-2" color={item.color} value={item.percent} />
               </CCol>
             ))}
-          </CRow>
+          </CRow> */}
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
             <MainChart data={parsedData} />
@@ -203,7 +204,7 @@ const Devices = () => {
       {activeItem === 3 && (
         <div style={{ marginTop: '20px' }}>
           <h4>Device 3 Statistics</h4>
-          <CRow>
+          {/* <CRow>
             {device1graph.map((item, index) => (
               <CCol key={index} xs={12} sm={6} lg={4}>
                 <div className="text-body-secondary">{item.title}</div>
@@ -213,7 +214,7 @@ const Devices = () => {
                 <CProgress thin className="mt-2" color={item.color} value={item.percent} />
               </CCol>
             ))}
-          </CRow>
+          </CRow> */}
           {/* Render MainChart */}
           <div style={{ marginTop: '20px' }}>
             <MainChart data={parsedData} />

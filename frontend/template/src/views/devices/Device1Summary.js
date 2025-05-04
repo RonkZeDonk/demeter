@@ -79,10 +79,10 @@ const Device1Summary = () => {
               </button>
               <button onClick={() => handleWateringFrequencySelect('Rarely')}>Rarely</button>
             </div>
-            <button className="submit-button" onClick={() => handleAnalyze()}>
-              Analyze
-            </button>
           </div>
+          <button className="submit-button" onClick={() => handleAnalyze()}>
+            Analyze
+          </button>
         </div>
       </nav>
       {/* Content
